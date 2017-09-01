@@ -1,0 +1,39 @@
+{
+    "author": "Limerainne",
+    "dependencies": {},
+    "keywords": [],
+    "name": "moonstamp",
+    "pebble": {
+        "displayName": "MoonStamp",
+        "enableMultiJS": true,
+        "messageKeys": [],
+        "projectType": "native",
+        "resources": {
+            "media": [
+                {
+                    "file": "images/bg_post",
+                    "name": "BG_POST",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                }
+            ]
+        },
+        "sdkVersion": "3",
+        "targetPlatforms": [
+            "aplite",
+            "basalt",
+            "chalk",
+            "diorite"
+        ],
+        "uuid": "680b8934-21e9-47dc-a618-2d1e5378d40f",
+        "watchapp": {
+            "watchface": true
+        }
+    },
+    "version": "0.1.0"
+}
