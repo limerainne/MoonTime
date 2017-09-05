@@ -1,5 +1,7 @@
 #include "layer_text_time.h"
 
+#include "util.h"
+
 TextLayer* layer_text_time_create_append_to(Layer *window_layer)    {
     GRect bounds = layer_get_bounds(window_layer);
     
@@ -23,10 +25,10 @@ TextLayer* layer_text_time_create_append_to(Layer *window_layer)    {
     return s_time_layer;
 }
 
-void layer_text_time_on_update(TextLayer *s_time_layer)    {
-    // get a 'tm' structure
-    time_t time_standard = time(NULL);
-    struct tm *tick_time = localtime(&time_standard);
+void layer_text_time_on_update(TextLayer *s_time_layer, struct tm *tick_time)    {   
+    if (tick_time == NULL)    { 
+        tick_time = get_time_now();
+    }
     
     // write 'current' hours and minutes into a buffer
     static char s_buffer[8];

@@ -4,4 +4,4 @@
 
 TextLayer* layer_text_time_create_append_to(Layer *window_layer);
 
-void layer_text_time_on_update(TextLayer *s_time_layer);
+void layer_text_time_on_update(TextLayer *s_time_layer, struct tm *tick_time);
