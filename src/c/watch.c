@@ -6,6 +6,10 @@
 static Window *s_main_window;
 
 static LayerImage layer_image_moon;
+
+static LayerImage layer_logo_emblem;
+static LayerImage layer_logo_sign;
+
 static TextLayer *s_time_layer;
 
 void on_create()    {
@@ -45,7 +49,7 @@ static void canvas_update_proc(Layer *layer, GContext *ctx) {
     
     struct tm *tick_time = get_time_now();
     
-    int len_min = 80;
+    int len_min = 60;
     int len_hrs = 40;
 
     GPoint start = GPoint(PBL_IF_ROUND_ELSE(90, 72),
@@ -67,7 +71,7 @@ static void canvas_update_proc(Layer *layer, GContext *ctx) {
     
     graphics_context_set_stroke_color(ctx, GColorBulgarianRose);
     graphics_context_set_fill_color(ctx, GColorBulgarianRose);
-    graphics_context_set_stroke_width(ctx, 8);
+    graphics_context_set_stroke_width(ctx, 6);
     graphics_draw_line(ctx, start, end_hrs);
 }
 
@@ -80,7 +84,17 @@ void on_load_window_main(Window *window)    {
     window_set_background_color(window, GColorWhite);
     
     // draw image
-    // layer_image_create_append_to(&layer_image_moon, window_layer, NULL);
+    // layer_image_create_append_to(&layer_image_moon, window_layer, RESOURCE_ID_BG_POST, bounds);
+    layer_image_create_append_to(&layer_logo_emblem, window_layer, RESOURCE_ID_LOGO_EMBLEM,
+                                GRect(PBL_IF_ROUND_ELSE(54, 36),
+                                     PBL_IF_ROUND_ELSE(25, 20),
+                                     72,
+                                     46));
+    layer_image_create_append_to(&layer_logo_sign, window_layer, RESOURCE_ID_LOGO_SIGN,
+                                GRect(PBL_IF_ROUND_ELSE(54, 36),
+                                     PBL_IF_ROUND_ELSE(111, 98),
+                                     72,
+                                     44));
     
     // draw hands
     s_canvas_layer = layer_create(bounds);
@@ -101,6 +115,9 @@ void on_unload_window_main(Window *window)    {
     
     // destroy image
     // layer_image_destroy(&layer_image_moon);
+    
+    layer_image_destroy(&layer_logo_emblem);
+    layer_image_destroy(&layer_logo_sign);
 }
 
 void on_handle_tick(struct tm *tick_time, TimeUnits units_changed)    {    

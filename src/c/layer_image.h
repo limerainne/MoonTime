@@ -7,5 +7,5 @@ typedef struct layer_image_t    {
     GBitmap *s_bitmap;
 } LayerImage;
 
-void layer_image_create_append_to(LayerImage *l_t, Layer *window_layer, GRect *_bound);
+void layer_image_create_append_to(LayerImage *l_t, Layer *window_layer, int res_id, GRect bounds);
 void layer_image_destroy(LayerImage *l_t);

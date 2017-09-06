@@ -11,6 +11,28 @@
         "resources": {
             "media": [
                 {
+                    "file": "images/logo_sign",
+                    "name": "LOGO_SIGN",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/logo_emblem",
+                    "name": "LOGO_EMBLEM",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "chalk",
+                        "diorite"
+                    ],
+                    "type": "bitmap"
+                },
+                {
                     "file": "images/bg_post",
                     "name": "BG_POST",
                     "targetPlatforms": [

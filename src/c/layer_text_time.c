@@ -8,16 +8,22 @@ TextLayer* layer_text_time_create_append_to(Layer *window_layer)    {
     // create the TextLayer with specific bounds
     // NOTE for PBL_IF_ROUND_ELSE() function
     TextLayer *s_time_layer = text_layer_create(
-        GRect(PBL_IF_ROUND_ELSE(40, 10), 
-              PBL_IF_ROUND_ELSE(4, -4), 
-              bounds.size.w - 2 * PBL_IF_ROUND_ELSE(40, 10), 
-              PBL_IF_ROUND_ELSE(28, 28)));
+        GRect(PBL_IF_ROUND_ELSE(20, 10), 
+              PBL_IF_ROUND_ELSE(90, 84) - 14,    // vertical position is going to set by actual font
+              bounds.size.w - 2 * PBL_IF_ROUND_ELSE(20, 10), 
+              28));
     
     // improve layout to be more like a watchface (?)
     text_layer_set_background_color(s_time_layer, GColorClear);
-    text_layer_set_text_color(s_time_layer, GColorBlack);
+    text_layer_set_text_color(s_time_layer, GColorLightGray);
     text_layer_set_font(s_time_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
     text_layer_set_text_alignment(s_time_layer, GTextAlignmentRight);
+    
+    // reposition regarding height
+    // - set dummy text
+    text_layer_set_text(s_time_layer, "12:34");
+    // - align center vertically
+    verticalAlignTextLayer(s_time_layer);
     
     // add layer as a child layer to the Window's root layer
     layer_add_child(window_layer, text_layer_get_layer(s_time_layer));
