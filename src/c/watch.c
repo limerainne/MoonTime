@@ -96,6 +96,9 @@ void on_load_window_main(Window *window)    {
                                      72,
                                      44));
     
+    // create the TextLayer with specific bounds
+    s_time_layer = layer_text_time_create_append_to(window_layer);
+    
     // draw hands
     s_canvas_layer = layer_create(bounds);
     
@@ -104,9 +107,6 @@ void on_load_window_main(Window *window)    {
 
     // Add to Window
     layer_add_child(window_get_root_layer(window), s_canvas_layer);
-    
-    // create the TextLayer with specific bounds
-    s_time_layer = layer_text_time_create_append_to(window_layer);
 }
 
 void on_unload_window_main(Window *window)    {

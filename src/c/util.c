@@ -13,6 +13,6 @@ void verticalAlignTextLayer(TextLayer *layer) {
     GRect frame = layer_get_frame(text_layer_get_layer(layer));
     GSize content = text_layer_get_content_size(layer);
     layer_set_frame(text_layer_get_layer(layer),
-           GRect(frame.origin.x, frame.origin.y + (frame.size.h - content.h) / 2,     // XXX why '-5' ??
+           GRect(frame.origin.x, frame.origin.y + ((frame.size.h - content.h - 8) / 2),     // XXX why '-8' ??
            frame.size.w, content.h));
 }
