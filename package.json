@@ -2,9 +2,9 @@
     "author": "Limerainne",
     "dependencies": {},
     "keywords": [],
-    "name": "moonstamp",
+    "name": "moontime",
     "pebble": {
-        "displayName": "MoonStamp",
+        "displayName": "MoonTime",
         "enableMultiJS": true,
         "messageKeys": [],
         "projectType": "native",
@@ -52,7 +52,7 @@
             "chalk",
             "diorite"
         ],
-        "uuid": "680b8934-21e9-47dc-a618-2d1e5378d40f",
+        "uuid": "7cd3d0f6-cb2f-4c63-9129-9a96c5726bcc",
         "watchapp": {
             "watchface": true
         }
