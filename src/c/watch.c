@@ -11,6 +11,7 @@ static LayerImage layer_logo_emblem;
 static LayerImage layer_logo_sign;
 
 static TextLayer *s_time_layer;
+static TextLayer *s_date_layer;
 
 void on_create()    {
     // create main Window element
@@ -27,9 +28,11 @@ void on_create()    {
     
     // make sure the time is displayed from the beginning
     layer_text_time_on_update(s_time_layer, NULL);
+    layer_text_date_on_update(s_date_layer, NULL);
     
     // register with TickTimerService
     tick_timer_service_subscribe(MINUTE_UNIT, on_handle_tick);
+    tick_timer_service_subscribe(DAY_UNIT, on_handle_tick);
 }
 
 void on_destroy()    {
@@ -98,6 +101,8 @@ void on_load_window_main(Window *window)    {
     
     // create the TextLayer with specific bounds
     s_time_layer = layer_text_time_create_append_to(window_layer);
+    s_date_layer = layer_text_time_create_append_to(window_layer);
+    text_layer_set_text_alignment(s_date_layer, GTextAlignmentLeft);
     
     // draw hands
     s_canvas_layer = layer_create(bounds);
@@ -120,10 +125,21 @@ void on_unload_window_main(Window *window)    {
     layer_image_destroy(&layer_logo_sign);
 }
 
-void on_handle_tick(struct tm *tick_time, TimeUnits units_changed)    {    
-    // set text as a current time
-    layer_text_time_on_update(s_time_layer, tick_time);
-    
-    // redraw layer
-    layer_mark_dirty(s_canvas_layer);
+void on_handle_tick(struct tm *tick_time, TimeUnits units_changed)    {
+    switch (units_changed)    {
+        case MINUTE_UNIT:
+            // set text as a current time
+            layer_text_time_on_update(s_time_layer, tick_time);
+            
+            // redraw layer
+            layer_mark_dirty(s_canvas_layer);
+            break;
+        
+        case DAY_UNIT:
+            layer_text_date_on_update(s_date_layer, tick_time);
+            break;
+        
+        default:
+            break;
+    }
 }
