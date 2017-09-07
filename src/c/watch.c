@@ -31,8 +31,10 @@ void on_create()    {
     layer_text_date_on_update(s_date_layer, NULL);
     
     // register with TickTimerService
-    tick_timer_service_subscribe(MINUTE_UNIT, on_handle_tick);
-    tick_timer_service_subscribe(DAY_UNIT, on_handle_tick);
+    // NOTE only last called unit/handler pair will be used
+    // ref: https://developer.pebble.com/docs/c/Foundation/Event_Service/TickTimerService/#tick_timer_service_subscribe
+    // ref: https://stackoverflow.com/questions/27004347/why-does-my-pebble-watchface-not-update-the-time-every-minute
+    tick_timer_service_subscribe(MINUTE_UNIT | DAY_UNIT, on_handle_tick);
 }
 
 void on_destroy()    {
@@ -126,20 +128,14 @@ void on_unload_window_main(Window *window)    {
 }
 
 void on_handle_tick(struct tm *tick_time, TimeUnits units_changed)    {
-    switch (units_changed)    {
-        case MINUTE_UNIT:
-            // set text as a current time
-            layer_text_time_on_update(s_time_layer, tick_time);
-            
-            // redraw layer
-            layer_mark_dirty(s_canvas_layer);
-            break;
-        
-        case DAY_UNIT:
-            layer_text_date_on_update(s_date_layer, tick_time);
-            break;
-        
-        default:
-            break;
+    if ((units_changed & MINUTE_UNIT) != 0)    {
+        // set text as a current time
+        layer_text_time_on_update(s_time_layer, tick_time);
+
+        // redraw layer
+        layer_mark_dirty(s_canvas_layer);
+    }
+    if ((units_changed & DAY_UNIT) != 0)    {
+        layer_text_date_on_update(s_date_layer, tick_time);
     }
 }
